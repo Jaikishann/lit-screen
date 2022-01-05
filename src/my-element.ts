@@ -6,6 +6,7 @@
 
 import {LitElement, html, css} from 'lit';
 import {customElement, property} from 'lit/decorators.js';
+import { startScreenShare } from './js/shareScreen';
 
 /**
  * An example element.
@@ -22,6 +23,9 @@ export class MyElement extends LitElement {
       border: solid 1px gray;
       padding: 16px;
       max-width: 800px;
+    }
+    button {
+      background-color: green;
     }
   `;
 
@@ -43,6 +47,10 @@ export class MyElement extends LitElement {
       <button @click=${this._onClick} part="button">
         Click Count: ${this.count}
       </button>
+
+      <button @click=${this._shareScreen} part="button">
+        Share screen
+      </button>
       <slot></slot>
     `;
   }
@@ -50,6 +58,10 @@ export class MyElement extends LitElement {
   private _onClick() {
     this.count++;
     this.dispatchEvent(new CustomEvent('count-changed'));
+  }
+
+  private _shareScreen() {
+    startScreenShare();
   }
 
   /**
